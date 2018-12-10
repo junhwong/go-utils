@@ -138,7 +138,7 @@ func Err(code string, innerOrMsg ...interface{}) *Exception {
 	ret := &Exception{
 		code: code,
 	}
-	if len(innerOrMsg) > 0 {
+	if len(innerOrMsg) == 1 {
 		m := innerOrMsg[0]
 		if err, ok := m.(Error); ok {
 			if ret.code == "" {
@@ -148,6 +148,8 @@ func Err(code string, innerOrMsg ...interface{}) *Exception {
 		} else {
 			ret.msg = m
 		}
+	} else {
+		ret.msg = fmt.Sprint(innerOrMsg...)
 	}
 	if ret.code == "" {
 		panic("无效的参数: code")

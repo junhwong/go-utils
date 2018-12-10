@@ -9,7 +9,7 @@ import (
 // computedErr 表示事先计算时产生的错误，如：函数调用 `fn()(v int, err error)`，该错误始终生效，非 TryXXX 转换报 panic。
 // zeroIfNil 表示在没有错误的情况下值为空，是否可以返回它们的默认值。
 func Convert(v interface{}, computedErr error, zeroIfNil ...bool) Converter {
-	b := false
+	b := true
 	if len(zeroIfNil) > 0 {
 		b = zeroIfNil[0]
 	}
@@ -66,7 +66,7 @@ type DefaultConverter struct {
 
 func panicIfError(err error) {
 	if err != nil {
-		panic(err)
+		//panic(err)
 	}
 }
 func (c *DefaultConverter) checkDefault() (bool, error) {
