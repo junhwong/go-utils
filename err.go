@@ -157,3 +157,13 @@ func Err(code string, innerOrMsg ...interface{}) *Exception {
 
 	return ret
 }
+
+func GetErrorCode(err error) string {
+	if err == nil {
+		return ""
+	}
+	if ex, ok := err.(*Exception); ok && ex.code != "" {
+		return ex.code
+	}
+	return "unknown-error"
+}

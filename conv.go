@@ -157,13 +157,18 @@ func (c *DefaultConverter) Int64() int64 {
 	return v
 }
 func (c *DefaultConverter) TryInt64() (int64, error) {
-	if ok, err := c.checkDefault(); ok && err == nil {
-		return 0, nil
+	v, err := c.TryFloat64()
+	if err != nil {
+		return 0, err
 	}
-	if v, ok := c.DefaultValue.(int64); ok {
-		return v, nil
-	}
-	return strconv.ParseInt(c.str(), 10, 64)
+	return int64(v), nil
+	// if ok, err := c.checkDefault(); ok && err == nil {
+	// 	return 0, nil
+	// }
+	// if v, ok := c.DefaultValue.(int64); ok {
+	// 	return v, nil
+	// }
+	// return strconv.ParseInt(c.str(), 10, 64)
 }
 
 func (c *DefaultConverter) Uint16() uint16 {
