@@ -2,8 +2,9 @@ package crypto_test
 
 import (
 	"encoding/base64"
-	"sdcd-api/web/crypto"
 	"testing"
+
+	"github.com/junhwong/go-utils/crypto"
 )
 
 func TestAes(t *testing.T) {
